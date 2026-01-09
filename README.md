@@ -36,11 +36,11 @@ cs hello.cs
 
 ## Documentation
 
-- **[EXTENDED_FEATURES.md](EXTENDED_FEATURES.md)** - All functions reference
-- **[CONSOLE_MODE.md](CONSOLE_MODE.md)** - Using the interactive console
-- **[SYNTAX.md](SYNTAX.md)** - Language syntax guide
-- **[GUI_README.md](GUI_README.md)** - Making GUI apps
-- **[SETUP_COMMAND.md](SETUP_COMMAND.md)** - Platform setup
+- **[EXTENDED_FEATURES](EXTENDED_FEATURES.md)** - All functions reference
+- **[SYNTAX](SYNTAX.md)** - Language syntax guide
+- **[CONSOLE_MODE](docs/CONSOLE_MODE.md)** - Using the interactive console
+- **[GUI_README](docs/GUI_README.md)** - Making GUI apps
+- **[SETUP_COMMAND](docs/SETUP_COMMAND.md)** - Platform setup
 
 ## Examples
 
@@ -132,23 +132,31 @@ cs your_program.cs
 Or without setup:
 
 ```bash
-castlescript your_program.cs
+python src/castlescript.py your_program.cs
 ```
 
-For setting up the `cs` command, see [SETUP_COMMAND.md](SETUP_COMMAND.md).
+For setting up the `cs` command, see [SETUP_COMMAND.md](docs/SETUP_COMMAND.md).
 
 ## Project Structure
 
 ```
 Castle-Script/
-├── castlescript.py              # Main interpreter
-├── castlescript_extended.py     # Extended functions
-├── castlescript_advanced.py     # Advanced functions
-├── castlescript_gui.py          # GUI support
-├── cs_repl.py                   # REPL implementation
-├── cs.bat / cs                  # Launchers
-├── examples/                    # Example programs
-└── calkulator/                  # Calculator demo
+├── README.md                   # Main documentation
+├── SYNTAX.md                   # Syntax guide
+├── EXTENDED_FEATURES.md        # Function reference
+├── cs / cs.bat                 # Launchers
+├── castlescript / castlescript.bat
+├── src/                        # Source code
+│   ├── castlescript.py
+│   ├── castlescript_extended.py
+│   ├── castlescript_advanced.py
+│   └── ...
+├── docs/                       # Documentation
+│   ├── CONSOLE_MODE.md
+│   ├── GUI_README.md
+│   └── SETUP_COMMAND.md
+├── examples/                   # Example programs
+└── calkulator/                 # Calculator demo
 ```
 
 ## Use Cases
