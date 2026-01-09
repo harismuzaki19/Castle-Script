@@ -1,442 +1,658 @@
-# CastleScript - Extended Features Guide
+# Extended Features Reference
 
-Panduan lengkap untuk menggunakan fitur-fitur extended CastleScript.
+This document provides a complete reference for all built-in functions available in CastleScript.
 
-## Status Implementasi
+## Arrays
 
-**✅ SELESAI:**
+### tambah(array, element)
 
-- Arrays & Lists (7 functions)
-- String Methods (11 functions)
-- Math Functions (10 functions)
-- File I/O (7 functions)
-- Date & Time (6 functions)
-- JSON Operations (2 functions)
-
-**Total: 43 built-in functions baru!**
-
----
-
-## 1. ARRAYS & LISTS
-
-### Membuat Array
-
-```castlescript
-var angka = [1, 2, 3, 4, 5]
-var nama = ["Ali", "Budi", "Citra"]
-var campur = [1, "dua", benar, 4.5]
-```
-
-### Mengakses Element
-
-```castlescript
-tulis(angka[0])  // 1
-tulis(angka[2])  // 3
-tulis(nama[1])   // "Budi"
-```
-
-### Fungsi Array
-
-**tambah(array, item)** - Menambah element ke akhir array
+Adds an element to the end of an array.
 
 ```castlescript
 var arr = [1, 2, 3]
 tambah(arr, 4)
-tulis(ke_teks(arr))  // [1, 2, 3, 4]
+// arr is now [1, 2, 3, 4]
 ```
 
-**hapus(array, index)** - Menghapus element berdasarkan index
+### hapus(array, index)
+
+Removes an element at the specified index.
 
 ```castlescript
-var arr = [10, 20, 30]
-hapus(arr, 1)  // Hapus index 1
-tulis(ke_teks(arr))  // [10, 30]
+var arr = [1, 2, 3]
+hapus(arr, 1)
+// arr is now [1, 3]
 ```
 
-**sisip(array, index, item)** - Menyisipkan element di posisi tertentu
+### sisip(array, index, element)
+
+Inserts an element at the specified position.
 
 ```castlescript
-var arr = [1, 2, 4]
-sisip(arr, 2, 3)  // Sisip 3 di index 2
-tulis(ke_teks(arr))  // [1, 2, 3, 4]
+var arr = [1, 3]
+sisip(arr, 1, 2)
+// arr is now [1, 2, 3]
 ```
 
-**gabung(array1, array2)** - Menggabungkan dua array
+### gabung(array1, array2)
+
+Concatenates two arrays.
 
 ```castlescript
-var arr1 = [1, 2, 3]
-var arr2 = [4, 5, 6]
-var hasil = gabung(arr1, arr2)
-tulis(ke_teks(hasil))  // [1, 2, 3, 4, 5, 6]
+var result = gabung([1, 2], [3, 4])
+// returns [1, 2, 3, 4]
 ```
 
-**irisan(array, start, end)** - Mengambil sebagian array (slice)
+### irisan(array, start, end)
+
+Returns a slice of the array from start to end (exclusive).
 
 ```castlescript
 var arr = [1, 2, 3, 4, 5]
-var bagian = irisan(arr, 1, 4)
-tulis(ke_teks(bagian))  // [2, 3, 4]
+var slice = irisan(arr, 1, 3)
+// returns [2, 3]
 ```
 
-**balik(array)** - Membalik urutan array
+### balik(array)
+
+Reverses the array.
 
 ```castlescript
-var arr = [1, 2, 3, 4]
-var terbalik = balik(arr)
-tulis(ke_teks(terbalik))  // [4, 3, 2, 1]
+var arr = [1, 2, 3]
+var reversed = balik(arr)
+// returns [3, 2, 1]
 ```
 
-**urutkan(array)** - Mengurutkan array
+### urutkan(array)
+
+Sorts the array in ascending order.
 
 ```castlescript
-var arr = [5, 2, 8, 1, 9]
-var terurut = urutkan(arr)
-tulis(ke_teks(terurut))  // [1, 2, 5, 8, 9]
+var arr = [3, 1, 2]
+var sorted = urutkan(arr)
+// returns [1, 2, 3]
 ```
 
----
+## Strings
 
-## 2. STRING METHODS
+### potong(string, start, end)
 
-**potong(text, start, end)** - Substring
+Extracts a substring.
 
 ```castlescript
-var teks = "Halo Dunia"
-tulis(pot ong(teks, 0, 4))  // "Halo"
-tulis(potong(teks, 5))      // "Dunia"
+var text = "Hello World"
+var sub = potong(text, 0, 5)
+// returns "Hello"
 ```
 
-**pisah(text, separator)** - Split string menjadi array
+### pisah(string, delimiter)
+
+Splits a string into an array.
 
 ```castlescript
-var teks = "satu,dua,tiga"
-var kata = pisah(teks, ",")
-tulis(ke_teks(kata))  // ["satu", "dua", "tiga"]
+var text = "a,b,c"
+var parts = pisah(text, ",")
+// returns ["a", "b", "c"]
 ```
 
-**gabung_teks(array, separator)** - Join array jadi string
+### gabung_teks(array, separator)
+
+Joins array elements into a string.
 
 ```castlescript
-var kata = ["Halo", "Dunia"]
-var teks = gabung_teks(kata, " ")
-tulis(teks)  // "Halo Dunia"
+var arr = ["a", "b", "c"]
+var text = gabung_teks(arr, "-")
+// returns "a-b-c"
 ```
 
-**ganti(text, old, new)** - Replace substring
+### ganti(string, old, new)
+
+Replaces all occurrences of old with new.
 
 ```castlescript
-var teks = "Halo Dunia"
-var baru = ganti(teks, "Dunia", "World")
-tulis(baru)  // "Halo World"
+var text = "hello world"
+var replaced = ganti(text, "world", "CastleScript")
+// returns "hello CastleScript"
 ```
 
-**huruf_besar(text) / huruf_kecil(text)** - Case conversion
+### huruf_besar(string)
+
+Converts to uppercase.
 
 ```castlescript
-tulis(huruf_besar("halo"))   // "HALO"
-tulis(huruf_kecil("DUNIA"))  // "dunia"
+huruf_besar("hello")  // returns "HELLO"
 ```
 
-**rapikan(text)** - Trim whitespace
+### huruf_kecil(string)
+
+Converts to lowercase.
 
 ```castlescript
-var teks = "  halo  "
-tulis(rapikan(teks))  // "halo"
+huruf_kecil("HELLO")  // returns "hello"
 ```
 
-**mengandung(text, substring)** - Check if contains
+### rapikan(string)
+
+Removes leading and trailing whitespace.
 
 ```castlescript
-var teks = "Halo Dunia"
-tulis(ke_teks(mengandung(teks, "Dunia")))  // benar
-tulis(ke_teks(mengandung(teks, "World")))  // salah
+rapikan("  hello  ")  // returns "hello"
 ```
 
-**mulai_dengan(text, prefix)** - Check if starts with
+### mengandung(string, substring)
+
+Checks if string contains substring.
 
 ```castlescript
-tulis(ke_teks(mulai_dengan("Halo", "H")))  // benar
+mengandung("hello world", "world")  // returns true
 ```
 
-**akhiri_dengan(text, suffix)** - Check if ends with
+### mulai_dengan(string, prefix)
+
+Checks if string starts with prefix.
 
 ```castlescript
-tulis(ke_teks(akhiri_dengan("Halo", "o")))  // benar
+mulai_dengan("hello", "he")  // returns true
 ```
 
-**indeks(text, substring)** - Find position
+### akhiri_dengan(string, suffix)
+
+Checks if string ends with suffix.
 
 ```castlescript
-var teks = "Halo Dunia"
-tulis(ke_teks(indeks(teks, "Dunia")))  // 5
+akhiri_dengan("hello", "lo")  // returns true
 ```
 
----
+### indeks(string, substring)
 
-## 3. MATH FUNCTIONS
-
-**absolut(x)** - Nilai absolut
+Finds the index of substring.
 
 ```castlescript
-tulis(ke_teks(absolut(-5)))  // 5
+indeks("hello", "ll")  // returns 2
 ```
 
-**pangkat(base, exp)** - Perpangkatan
+## Math Functions
+
+### absolut(number)
+
+Returns absolute value.
 
 ```castlescript
-tulis(ke_teks(pangkat(2, 3)))  // 8.0
+absolut(-5)  // returns 5
 ```
 
-**akar(x)** - Akar kuadrat
+### pangkat(base, exponent)
+
+Raises base to the power of exponent.
 
 ```castlescript
-tulis(ke_teks(akar(16)))  // 4.0
+pangkat(2, 3)  // returns 8
 ```
 
-**bulatkan(x, digits)** - Pembulatan
+### akar(number)
+
+Returns square root.
 
 ```castlescript
-tulis(ke_teks(bulatkan(3.7)))     // 4
-tulis(ke_teks(bulatkan(3.14159, 2)))  // 3.14
+akar(16)  // returns 4
 ```
 
-**lantai(x)** - Floor (pembulatan ke bawah)
+### bulatkan(number)
+
+Rounds to nearest integer.
 
 ```castlescript
-tulis(ke_teks(lantai(3.9)))  // 3
+bulatkan(3.7)  // returns 4
 ```
 
-**langit(x)** - Ceil (pembulatan ke atas)
+### lantai(number)
+
+Rounds down to integer.
 
 ```castlescript
-tulis(ke_teks(langit(3.1)))  // 4
+lantai(3.9)  // returns 3
 ```
 
-**minimal(...)** - Nilai terkecil
+### langit(number)
+
+Rounds up to integer.
 
 ```castlescript
-tulis(ke_teks(minimal(5, 2, 8, 3)))  // 2
+langit(3.1)  // returns 4
 ```
 
-**maksimal(...)** - Nilai terbesar
+### minimal(...)
+
+Returns the smallest value.
+
+```cast lescript
+minimal(5, 2, 8)  // returns 2
+```
+
+### maksimal(...)
+
+Returns the largest value.
 
 ```castlescript
-tulis(ke_teks(maksimal(5, 2, 8, 3)))  // 8
+maksimal(5, 2, 8)  // returns 8
 ```
 
-**angka_acak()** - Random 0-1
+### angka_acak()
+
+Returns random number between 0 and 1.
 
 ```castlescript
-var angka = angka_acak()
-tulis(ke_teks(angka))  // 0.xxx
+var rand = angka_acak()
 ```
 
-**acak_antara(min, max)** - Random dalam range
+### acak_antara(min, max)
+
+Returns random integer between min and max (inclusive).
 
 ```castlescript
-var angka = acak_antara(1, 10)
-tulis("Random 1-10: " + ke_teks(angka))
+var dice = acak_antara(1, 6)
 ```
 
----
+## File Operations
 
-## 4. FILE I/O
+### baca_file(path)
 
-**baca_file(path)** - Membaca file
+Reads file contents as string.
 
 ```castlescript
-var isi = baca_file("data.txt")
-tulis(isi)
+var content = baca_file("data.txt")
 ```
 
-**tulis_file(path, content)** - Menulis file (overwrite)
+### tulis_file(path, content)
+
+Writes content to file.
 
 ```castlescript
 tulis_file("output.txt", "Hello World")
 ```
 
-**tambah_file(path, content)** - Append ke file
+### tambah_file(path, content)
+
+Appends content to file.
 
 ```castlescript
-tambah_file("log.txt", "Log entry\\n")
+tambah_file("log.txt", "New line\n")
 ```
 
-**hapus_file(path)** - Menghapus file
+### hapus_file(path)
+
+Deletes a file.
 
 ```castlescript
 hapus_file("temp.txt")
 ```
 
-**ada_file(path)** - Cek apakah file exists
+### ada_file(path)
+
+Checks if file exists.
 
 ```castlescript
-jika (ada_file("config.ini")) {
-    tulis("Config ditemukan")
+jika (ada_file("config.txt")) {
+    tulis("Config found")
 }
 ```
 
-**buat_folder(path)** - Membuat direktori
+### buat_folder(path)
+
+Creates a directory.
 
 ```castlescript
-buat_folder("data/backup")
+buat_folder("output")
 ```
 
-**daftar_file(directory)** - List files
+### daftar_file(path)
+
+Lists files in directory.
 
 ```castlescript
 var files = daftar_file(".")
-tulis(ke_teks(files))
 ```
 
----
+## Date and Time
 
-## 5. DATE & TIME
+### waktu_sekarang()
 
-**waktu_sekarang()** - Waktu saat ini
+Returns current timestamp.
 
 ```castlescript
-var sekarang = waktu_sekarang()
-tulis(ke_teks(sekarang))
+var now = waktu_sekarang()
 ```
 
-**tanggal_sekarang()** - Tanggal hari ini
+### tanggal_sekarang()
+
+Returns current date as string.
 
 ```castlescript
-var hari_ini = tanggal_sekarang()
-tulis(ke_teks(hari_ini))
+var date = tanggal_sekarang()
 ```
 
-**format_waktu(datetime, format)** - Format waktu
+### format_waktu(timestamp, format)
+
+Formats timestamp according to format string.
 
 ```castlescript
-var sekarang = waktu_sekarang()
-var formatted = format_waktu(sekarang, "%Y-%m-%d %H:%M:%S")
-tulis(formatted)
+var formatted = format_waktu(waktu_sekarang(), "%Y-%m-%d")
 ```
 
-**tahun(datetime) / bulan(datetime) / hari(datetime)** - Extract components
+### tahun(timestamp)
+
+Extracts year from timestamp.
 
 ```castlescript
-var tahun_sekarang = tahun()
-var bulan_sekarang = bulan()
-tulis("Tahun: " + ke_teks(tahun_sekarang))
+var y = tahun(waktu_sekarang())
 ```
 
----
+### bulan(timestamp)
 
-## 6. OBJECTS/DICTIONARIES
-
-### Membuat Object
+Extracts month from timestamp.
 
 ```castlescript
-var orang = {
-    nama: "Budi",
-    umur: 25,
-    kota: "Jakarta"
-}
+var m = bulan(waktu_sekarang())
 ```
 
-### Mengakses Property
+### hari(timestamp)
+
+Extracts day from timestamp.
 
 ```castlescript
-tulis(orang["nama"])  // "Budi"
-tulis(ke_teks(orang["umur"]))  // 25
+var d = hari(waktu_sekarang())
 ```
 
-### Modify Object
+## JSON
+
+### dari_json(string)
+
+Parses JSON string to object/array.
 
 ```castlescript
-orang["email"] = "budi@example.com"  // Tambah property baru (akan ditambahkan di future update)
+var obj = dari_json('{"name": "test"}')
+tulis(obj.name)  // prints "test"
 ```
 
----
+### ke_json(value)
 
-## 7. JSON OPERATIONS
-
-**dari_json(string)** - Parse JSON
+Converts value to JSON string.
 
 ```castlescript
-var json_str = "{\"nama\": \"Ali\", \"umur\": 30}"
-var obj = dari_json(json_str)
-tulis(obj["nama"])
+var obj = {name: "test", value: 123}
+var json = ke_json(obj)
 ```
 
-**ke_json(object)** - Convert ke JSON string
+## Regular Expressions
+
+### cocokkan(text, pattern)
+
+Finds all matches of regex pattern in text.
 
 ```castlescript
-var orang = {nama: "Budi", umur: 25}
-var json_str = ke_json(orang)
-tulis(json_str)
+var matches = cocokkan("abc123def", "[0-9]+")
+// returns ["123"]
 ```
 
----
+### ganti_regex(text, pattern, replacement)
 
-## Contoh Program Lengkap
-
-### Program: Analisis Data Sederhana
+Replaces regex matches with replacement.
 
 ```castlescript
-// Program analisis data sederhana
-tulis("=== ANALISIS DATA ===")
-
-// Data angka
-var data = [45, 67, 23, 89, 12, 56, 78, 34]
-
-// Statistik
-var total = 0
-ulangi(var i = 0; i < panjang(data); i = i + 1) {
-    total = total + data[i]
-}
-
-var rata = total / panjang(data)
-var maks = maksimal(45, 67, 23, 89, 12, 56, 78, 34)
-var minim = minimal(45, 67, 23, 89, 12, 56, 78, 34)
-
-tulis("Jumlah data: " + ke_teks(panjang(data)))
-tulis("Total: " + ke_teks(total))
-tulis("Rata-rata: " + ke_teks(rata))
-tulis("Maksimal: " + ke_teks(maks))
-tulis("Minimal: " + ke_teks(minim))
-
-// Urutkan data
-var terurut = urutkan(data)
-tulis("Data terurut: " + ke_teks(terurut))
-
-// Simpan hasil
-var hasil = "Analisis Data\\n"
-hasil = hasil + "Total: " + ke_teks(total) + "\\n"
-hasil = hasil + "Rata-rata: " + ke_teks(rata) + "\\n"
-tulis_file("hasil_analisis.txt", hasil)
-tulis("Hasil disimpan ke hasil_analisis.txt")
+var result = ganti_regex("abc123", "[0-9]+", "X")
+// returns "abcX"
 ```
 
----
+### tes_regex(text, pattern)
 
-## Tips & Best Practices
+Tests if pattern matches text.
 
-1. **Arrays**: Gunakan `panjang(arr)` untuk iterasi
-2. **Strings**: Gunakan `pisah()` dan `gabung_teks()` untuk parsing data
-3. **Math**: Gunakan `bulatkan()` untuk tampilan angka yang rapi
-4. **File I/O**: Selalu cek `ada_file()` sebelum baca
-5. **Objects**: Gunakan untuk struktur data kompleks
+```castlescript
+var matches = tes_regex("abc123", "[0-9]")
+// returns true
+```
 
----
+### pisah_regex(text, pattern)
 
-## Troubleshooting
+Splits text using regex pattern.
 
-**Error: "Index di luar jangkauan"**
+```castlescript
+var parts = pisah_regex("a1b2c3", "[0-9]")
+// returns ["a", "b", "c", ""]
+```
 
-- Pastikan index < panjang(array)
+## Advanced Array Methods
 
-**Error: "File tidak ditemukan"**
+These functions take a callback function as parameter.
 
-- Gunakan `ada_file()` untuk cek sebelum baca
+### petakan(array, function)
 
-**Error: "Tidak bisa mengakar bilangan negatif"**
+Maps each element through a function (like map in JavaScript).
 
-- Gunakan `absolut()` dulu jika perlu
+```castlescript
+fungsi double(x) { kembalikan x * 2 }
+var doubled = petakan([1, 2, 3], double)
+// returns [2, 4, 6]
+```
 
----
+### saring(array, function)
 
-**Versi**: CastleScript Extended v1.0
-**Bahasa**: 100% Indonesia 🇮🇩
+Filters array using predicate function.
+
+```castlescript
+fungsi is_even(x) { kembalikan x % 2 == 0 }
+var evens = saring([1, 2, 3, 4], is_even)
+// returns [2, 4]
+```
+
+### kurangi(array, function, initial)
+
+Reduces array to single value.
+
+```castlescript
+fungsi sum(a, b) { kembalikan a + b }
+var total = kurangi([1, 2, 3], sum, 0)
+// returns 6
+```
+
+### untuk_setiap(array, function)
+
+Executes function for each element.
+
+```castlescript
+fungsi print_double(x) { tulis(x * 2) }
+untuk_setiap([1, 2, 3], print_double)
+```
+
+### cari(array, function)
+
+Finds first element matching predicate.
+
+```castlescript
+fungsi gt_2(x) { kembalikan x > 2 }
+var found = cari([1, 2, 3, 4], gt_2)
+// returns 3
+```
+
+### ada_yang(array, function)
+
+Tests if any element matches predicate.
+
+```castlescript
+fungsi is_positive(x) { kembalikan x > 0 }
+var has_positive = ada_yang([-1, 0, 1], is_positive)
+// returns true
+```
+
+### semua_nya(array, function)
+
+Tests if all elements match predicate.
+
+```castlescript
+fungsi is_positive(x) { kembalikan x > 0 }
+var all_positive = semua_nya([1, 2, 3], is_positive)
+// returns true
+```
+
+### indeks_dari(array, element)
+
+Finds index of element in array.
+
+```castlescript
+var idx = indeks_dari([10, 20, 30], 20)
+// returns 1
+```
+
+## Type Checking
+
+### adalah_array(value)
+
+Checks if value is an array.
+
+```castlescript
+adalah_array([1, 2])  // returns true
+```
+
+### adalah_object(value)
+
+Checks if value is an object.
+
+```castlescript
+adalah_object({a: 1})  // returns true
+```
+
+### adalah_fungsi(value)
+
+Checks if value is a function.
+
+```castlescript
+fungsi test() { }
+adalah_fungsi(test)  // returns true
+```
+
+### adalah_angka(value)
+
+Checks if value is a number.
+
+```castlescript
+adalah_angka(123)  // returns true
+```
+
+### adalah_teks(value)
+
+Checks if value is a string.
+
+```castlescript
+adalah_teks("hello")  // returns true
+```
+
+### adalah_boolean(value)
+
+Checks if value is boolean.
+
+```castlescript
+adalah_boolean(benar)  // returns true
+```
+
+## String Utilities
+
+### ulangi_teks(string, count)
+
+Repeats string n times.
+
+```castlescript
+ulangi_teks("ab", 3)  // returns "ababab"
+```
+
+### balik_teks(string)
+
+Reverses a string.
+
+```castlescript
+balik_teks("hello")  // returns "olleh"
+```
+
+### abjad(string)
+
+Splits string into array of characters.
+
+```castlescript
+abjad("abc")  // returns ["a", "b", "c"]
+```
+
+### padl(string, length, char=" ")
+
+Pads string on the left to specified length.
+
+```castlescript
+padl("5", 3, "0")  // returns "005"
+```
+
+### padr(string, length, char=" ")
+
+Pads string on the right to specified length.
+
+```castlescript
+padr("hi", 5)  // returns "hi   "
+```
+
+## Core Functions
+
+### tulis(...)
+
+Prints values to console.
+
+```castlescript
+tulis("Hello World")
+tulis("Value:", 42)
+```
+
+### baca()
+
+Reads input from user.
+
+```castlescript
+var name = baca()
+tulis("Hello, " + name)
+```
+
+### panjang(collection)
+
+Returns length of array or string.
+
+```castlescript
+panjang([1, 2, 3])  // returns 3
+panjang("hello")    // returns 5
+```
+
+### tipe(value)
+
+Returns type of value as string.
+
+```castlescript
+tipe(123)       // returns "number"
+tipe("hello")   // returns "string"
+tipe([1, 2])    // returns "array"
+```
+
+### ke_angka(value)
+
+Converts value to number.
+
+```castlescript
+ke_angka("123")  // returns 123
+```
+
+### ke_teks(value)
+
+Converts value to string.
+
+```castlescript
+ke_teks(123)  // returns "123"
+```
+
+## Notes
+
+All functions are available globally without needing to import anything. Error handling is built-in for most operations.
+
+For GUI functions, see GUI_README.md.

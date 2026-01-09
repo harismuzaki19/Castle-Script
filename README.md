@@ -1,139 +1,102 @@
-# CastleScript
+# Castle-Script
 
-**Bahasa Pemrograman Indonesia - 100% Complete** 🇮🇩
+A programming language with Indonesian syntax. Castle-Script has 70+ built-in functions and works like Python or JavaScript.
 
-CastleScript adalah bahasa pemrograman lengkap dengan sintaks Bahasa Indonesia, memiliki 70+ built-in functions dan fitur setara Python/JavaScript.
-
-## 🚀 Quick Start
-
-### Install & Run
+## Quick Start
 
 ```bash
-# Download folder CastleScript
-# Masuk ke folder
-cd "Castle Script"
-
-# Run interactive console
+# Interactive console
 cs
 
-# Atau run file
-cs hello.cs
+# Run a file
+cs program.cs
+
+# Help
+cs --help
 ```
 
-### Hello World
+## Hello World
 
 ```castlescript
 // hello.cs
 tulis("Halo, Dunia!")
 ```
 
-Run:
-
 ```bash
 cs hello.cs
 ```
 
-## ✨ Features
+## Features
 
-- ✅ **70+ built-in functions** - Arrays, Strings, Math, File I/O, JSON, Regex
-- ✅ **Interactive REPL** - Console mode seperti Python/Node.js
-- ✅ **GUI built-in** - Buat desktop apps
-- ✅ **Cross-platform** - Windows, macOS, Linux
-- ✅ **100% Indonesian** - Semua syntax dalam Bahasa Indonesia
+- 70+ built-in functions for arrays, strings, math, files, JSON, regex
+- Interactive console (REPL) like Python
+- GUI support for desktop apps
+- Cross-platform (Windows, macOS, Linux)
+- 100% Indonesian syntax
 
-## 📖 Documentation
+## Documentation
 
-- **[EXTENDED_FEATURES.md](EXTENDED_FEATURES.md)** - Referensi lengkap 70+ functions
-- **[CONSOLE_MODE.md](CONSOLE_MODE.md)** - Panduan interactive console (REPL)
-- **[SYNTAX.md](SYNTAX.md)** - Panduan syntax lengkap
-- **[GUI_README.md](GUI_README.md)** - Membuat GUI applications
-- **[SETUP_COMMAND.md](SETUP_COMMAND.md)** - Setup command untuk semua platform
+- **[EXTENDED_FEATURES.md](EXTENDED_FEATURES.md)** - All functions reference
+- **[CONSOLE_MODE.md](CONSOLE_MODE.md)** - Using the interactive console
+- **[SYNTAX.md](SYNTAX.md)** - Language syntax guide
+- **[GUI_README.md](GUI_README.md)** - Making GUI apps
+- **[SETUP_COMMAND.md](SETUP_COMMAND.md)** - Platform setup
 
-## 💡 Examples
+## Examples
 
-### Basic Programming
+### Variables and Functions
 
 ```castlescript
-// Variables
 var nama = "Budi"
 var umur = 25
 
-// Arrays
-var angka = [1, 2, 3, 4, 5]
-tulis("Panjang: " + ke_teks(panjang(angka)))
-
-// Functions
 fungsi tambah(a, b) {
     kembalikan a + b
 }
+
 tulis(tambah(5, 3))  // 8
 ```
 
-### Advanced: Map/Filter/Reduce
+### Arrays
 
 ```castlescript
 var numbers = [1, 2, 3, 4, 5]
+tulis("Length: " + ke_teks(panjang(numbers)))
 
-// Map
+// map/filter/reduce
 fungsi double(x) { kembalikan x * 2 }
 var doubled = petakan(numbers, double)
 // [2, 4, 6, 8, 10]
+```
 
-// Filter
-fungsi is_even(x) { kembalikan x % 2 == 0 }
-var evens = saring(numbers, is_even)
-// [2, 4]
+### Objects
 
-// Reduce
-fungsi sum(a, b) { kembalikan a + b }
-var total = kurangi(numbers, sum, 0)
-// 15
+```castlescript
+var person = {nama: "Ali", umur: 25}
+tulis(person.nama)  // dot notation works
+```
+
+### File Operations
+
+```castlescript
+tulis_file("data.txt", "Hello World")
+var content = baca_file("data.txt")
+tulis(content)
 ```
 
 ### GUI Application
 
 ```castlescript
-// Lihat: calkulator/kalkulator_gui.cs
 buat_jendela("My App", 400, 300)
 buat_label("Hello!", 10, 10)
-buat_tombol("Click Me", my_function, 10, 50, 100, 30)
+buat_tombol("Click", my_function, 10, 50, 100, 30)
 jalankan()
 ```
 
-## 🎯 Use Cases
-
-- 📚 **Education** - Belajar programming dalam Bahasa Indonesia
-- 💻 **Desktop Apps** - Buat aplikasi GUI dengan mudah
-- 📊 **Data Processing** - Process CSV, JSON, text files
-- 🔧 **Automation** - Automate repetitive tasks
-- 🎮 **Games** - Simple games dan aplikasi interaktif
-
-## 📁 Project Structure
-
-```
-Castle Script/
-├── castlescript.py          # Main interpreter
-├── castlescript_extended.py # 47 extended functions
-├── castlescript_advanced.py # 23 advanced functions
-├── castlescript_gui.py      # GUI functions
-├── cs_repl.py              # Interactive REPL
-├── cs.bat                  # Windows launcher
-├── cs                      # macOS/Linux launcher
-├── examples/               # Example programs
-├── calkulator/             # Calculator app (working demo)
-└── [Documentation files]
-```
-
-## 🎨 Interactive Console (REPL)
+## Interactive Console
 
 ```bash
 $ cs
-╔════════════════════════════════════════╗
-║   CastleScript - Mode Interaktif      ║
-║   Bahasa Pemrograman Indonesia        ║
-║   Versi: 2.0 Extended                 ║
-╚════════════════════════════════════════╝
-
 >>> var x = 10
 >>> x * 2
 20
@@ -142,79 +105,63 @@ $ cs
 >>> keluar
 ```
 
-## 🔧 Commands
+## Commands
 
 ```bash
-cs                    # Interactive mode (REPL)
-cs file.cs            # Run CastleScript file
+cs                    # Interactive mode
+cs file.cs            # Run file
 cs --help             # Show help
 cs --version          # Show version
 ```
 
-## 📚 Learn More
+## Installation
 
-1. Start with **[SYNTAX.md](SYNTAX.md)** - Basic syntax
-2. Explore **[EXTENDED_FEATURES.md](EXTENDED_FEATURES.md)** - All functions
-3. Try **examples/** folder - Sample programs
-4. Build **GUI apps** with **[GUI_README.md](GUI_README.md)**
-5. Use **REPL** with **[CONSOLE_MODE.md](CONSOLE_MODE.md)**
+Clone the repository:
 
-## 🏆 Stats
-
-- **70+ functions** implemented
-- **100% Indonesian** syntax
-- **Zero errors** in production
-- **Cross-platform** support
-- **Production ready**
-
-## 🌟 Highlights
-
-**Seperti Python**:
-
-```castlescript
-var data = [1, 2, 3, 4, 5]
-fungsi square(x) { kembalikan x * x }
-var squared = petakan(data, square)
+```bash
+git clone https://github.com/harismuzaki19/Castle-Script.git
+cd Castle-Script
 ```
 
-**Seperti JavaScript**:
+Run a program:
 
-```castlescript
-var obj = {nama: "Ali", umur: 25}
-tulis(obj.nama)  // Dot notation!
+```bash
+cs your_program.cs
 ```
 
-**Plus GUI Built-in**:
+Or without setup:
 
-```castlescript
-buat_jendela("App", 400, 300)
-buat_tombol("OK", fungsi() { tulis("Clicked!") }, 10, 10, 80, 30)
-jalankan()
+```bash
+castlescript your_program.cs
 ```
 
-## 🎓 For Educators
+For setting up the `cs` command, see [SETUP_COMMAND.md](SETUP_COMMAND.md).
 
-CastleScript perfect untuk:
+## Project Structure
 
-- Mengajar programming basics
-- Workshop Bahasa Indonesia
-- Coding bootcamps
-- School computer science
+```
+Castle-Script/
+├── castlescript.py              # Main interpreter
+├── castlescript_extended.py     # Extended functions
+├── castlescript_advanced.py     # Advanced functions
+├── castlescript_gui.py          # GUI support
+├── cs_repl.py                   # REPL implementation
+├── cs.bat / cs                  # Launchers
+├── examples/                    # Example programs
+└── calkulator/                  # Calculator demo
+```
 
-Students bisa langsung paham karena **100% Bahasa Indonesia**!
+## Use Cases
 
-## 🤝 Contributing
+- Education - learn programming in Indonesian
+- Desktop apps - build GUI applications
+- Data processing - handle CSV, JSON, text files
+- Automation - script repetitive tasks
 
-Silakan explore dan beri feedback untuk improvement!
+## Version
 
-## 📄 License
+Current version: 0.9.1 Beta
+
+## License
 
 Open for educational and personal use.
-
----
-
-**CastleScript - Bahasa Pemrograman Indonesia yang Lengkap!** 🇮🇩🚀
-
-**Versi**: 0.9.1 Beta  
-**Status**: ✅ Production Ready  
-**Completion**: 100%
