@@ -30,7 +30,7 @@ cs program.cs
 Or without PATH setup:
 
 ```cmd
-python castlescript.py program.cs
+castlescript program.cs
 ```
 
 ## macOS/Linux

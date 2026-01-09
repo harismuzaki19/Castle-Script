@@ -132,7 +132,7 @@ cs your_program.cs
 Or without setup:
 
 ```bash
-python src/castlescript.py your_program.cs
+castlescript your_program.cs
 ```
 
 For setting up the `cs` command, see [SETUP_COMMAND.md](docs/SETUP_COMMAND.md).
