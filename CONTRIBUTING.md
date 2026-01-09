@@ -1,112 +1,112 @@
-# Contributing to Castle-Script
+# Berkontribusi ke Castle-Script
 
-Thank you for your interest in contributing to Castle-Script! This document provides guidelines for contributing to the project.
+Terima kasih atas minat Anda untuk berkontribusi ke Castle-Script! Dokumen ini memberikan panduan untuk berkontribusi ke proyek.
 
-## How to Contribute
+## Cara Berkontribusi
 
-### Reporting Bugs
+### Melaporkan Bug
 
-Found a bug? Please create an issue with:
+Menemukan bug? Silakan buat issue dengan:
 
-- Clear title and description
-- Steps to reproduce
-- Expected vs actual behavior
-- Castle-Script version
-- Operating system
-- Code sample (if applicable)
+- Judul dan deskripsi yang jelas
+- Langkah-langkah untuk mereproduksi
+- Perilaku yang diharapkan vs aktual
+- Versi Castle-Script
+- Sistem operasi
+- Contoh kode (jika ada)
 
-### Suggesting Features
+### Mengusulkan Fitur
 
-Have an idea? Open an issue with:
+Punya ide? Buka issue dengan:
 
-- Clear feature description
-- Use cases and examples
-- Why it would be useful
-- Possible implementation approach
+- Deskripsi fitur yang jelas
+- Use case dan contoh
+- Mengapa fitur ini berguna
+- Pendekatan implementasi yang mungkin
 
-### Code Contributions
+### Kontribusi Kode
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes
-4. Test your changes
-5. Commit with clear messages
-6. Push to your fork
-7. Open a Pull Request
+1. Fork repository
+2. Buat feature branch (`git checkout -b feature/fitur-keren`)
+3. Buat perubahan Anda
+4. Test perubahan Anda
+5. Commit dengan pesan yang jelas
+6. Push ke fork Anda
+7. Buka Pull Request
 
-## Development Setup
+## Setup Development
 
 ```bash
-# Clone your fork
-git clone https://github.com/your-username/Castle-Script.git
+# Clone fork Anda
+git clone https://github.com/username-anda/Castle-Script.git
 cd Castle-Script
 
-# Test the interpreter
-python src/castlescript.py examples/hello.cs
+# Test interpreter
+cs examples/hello.cs
 
 # Run tests
-python src/castlescript.py examples/test_features.cs
+cs examples/test_features.cs
 ```
 
-## Code Style
+## Style Kode
 
-### Python Code
+### Kode CastleScript
 
-- Follow PEP 8 guidelines
-- Use meaningful variable names
-- Add comments for complex logic
-- Keep functions focused and small
+- Gunakan keyword Indonesia secara konsisten
+- Ikuti naming conventions yang ada
+- Tambahkan komentar untuk logika yang kompleks
+- Test kode Anda sebelum submit
 
-### CastleScript Code
+### Kode Python (untuk kontributor core)
 
-- Use Indonesian keywords consistently
-- Follow existing naming conventions
-- Add comments for complex examples
-- Test your code before submitting
+- Ikuti pedoman PEP 8
+- Gunakan nama variabel yang bermakna
+- Tambahkan komentar untuk logika kompleks
+- Jaga fungsi tetap fokus dan kecil
 
 ## Testing
 
-Before submitting:
+Sebelum submit:
 
-1. Test on your target platform
-2. Run existing test files
-3. Add tests for new features
-4. Verify no regressions
+1. Test di platform target Anda
+2. Jalankan file test yang ada
+3. Tambahkan test untuk fitur baru
+4. Verifikasi tidak ada regresi
 
-## Documentation
+## Dokumentasi
 
-- Update relevant .md files
-- Add examples for new features
-- Keep documentation clear and concise
-- Use both English and Indonesian where appropriate
+- Update file .md yang relevan
+- Tambahkan contoh untuk fitur baru
+- Jaga dokumentasi tetap jelas dan ringkas
+- Gunakan Bahasa Indonesia untuk contoh
 
-## Pull Request Process
+## Proses Pull Request
 
-1. Update documentation if needed
-2. Add yourself to contributors (if you want)
-3. Ensure all tests pass
-4. Request review from maintainers
-5. Address review comments
-6. Wait for approval and merge
+1. Update dokumentasi jika diperlukan
+2. Tambahkan diri Anda ke contributors (jika mau)
+3. Pastikan semua test pass
+4. Minta review dari maintainers
+5. Tangani komentar review
+6. Tunggu approval dan merge
 
-## Community Guidelines
+## Pedoman Komunitas
 
-- Be respectful and constructive
-- Help others learn
-- Share knowledge
-- Give credit where due
+- Bersikap hormat dan konstruktif
+- Bantu orang lain belajar
+- Bagikan pengetahuan
+- Berikan kredit yang layak
 - Have fun coding!
 
-## Questions?
+## Pertanyaan?
 
-- Open a GitHub Discussion
-- Create an issue with "question" label
-- Check existing documentation first
+- Buka GitHub Discussion
+- Buat issue dengan label "question"
+- Periksa dokumentasi yang ada terlebih dahulu
 
-## License
+## Lisensi
 
-By contributing, you agree that your contributions will be licensed under the same license as the project.
+Dengan berkontribusi, Anda setuju bahwa kontribusi Anda akan dilisensikan di bawah lisensi yang sama dengan proyek.
 
 ---
 
-Thank you for making Castle-Script better! 🚀
+Terima kasih telah membuat Castle-Script lebih baik! 🚀

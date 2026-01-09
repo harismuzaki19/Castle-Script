@@ -1,112 +1,112 @@
-# Security Policy
+# Kebijakan Keamanan
 
-## Supported Versions
+## Versi yang Didukung
 
-Currently supported versions of Castle-Script:
+Versi Castle-Script yang saat ini didukung:
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 0.9.x   | :white_check_mark: |
-| < 0.9   | :x:                |
+| Versi | Status             |
+| ----- | ------------------ |
+| 0.9.x | :white_check_mark: |
+| < 0.9 | :x:                |
 
-## Reporting a Vulnerability
+## Melaporkan Kerentanan
 
-We take security seriously. If you discover a security vulnerability in Castle-Script, please report it responsibly.
+Kami menganggap keamanan dengan serius. Jika Anda menemukan kerentanan keamanan di Castle-Script, harap laporkan secara bertanggung jawab.
 
-### How to Report
+### Cara Melaporkan
 
-**Please DO NOT create a public GitHub issue for security vulnerabilities.**
+**JANGAN membuat issue publik di GitHub untuk kerentanan keamanan.**
 
-Instead, report security issues via:
+Sebagai gantinya, laporkan masalah keamanan melalui:
 
-1. **Email**: Create an issue with label "security" and we'll contact you privately
-2. **GitHub Security Advisory**: Use the "Security" tab → "Report a vulnerability"
+1. **Email**: Buat issue dengan label "security" dan kami akan menghubungi Anda secara pribadi
+2. **GitHub Security Advisory**: Gunakan tab "Security" → "Report a vulnerability"
 
-### What to Include
+### Informasi yang Harus Disertakan
 
-When reporting a vulnerability, please include:
+Saat melaporkan kerentanan, harap sertakan:
 
-- Description of the vulnerability
-- Steps to reproduce the issue
-- Affected versions
-- Potential impact
-- Suggested fix (if you have one)
+- Deskripsi kerentanan
+- Langkah-langkah untuk mereproduksi masalah
+- Versi yang terpengaruh
+- Potensi dampak
+- Saran perbaikan (jika ada)
 
-### Response Timeline
+### Timeline Respons
 
-- **Initial Response**: Within 48 hours
-- **Status Update**: Within 7 days
-- **Fix Timeline**: Depends on severity
-  - Critical: 1-7 days
-  - High: 1-14 days
-  - Medium: 1-30 days
-  - Low: Best effort
+- **Respons Awal**: Dalam 48 jam
+- **Update Status**: Dalam 7 hari
+- **Timeline Perbaikan**: Tergantung tingkat keparahan
+  - Kritis: 1-7 hari
+  - Tinggi: 1-14 hari
+  - Sedang: 1-30 hari
+  - Rendah: Best effort
 
-### Security Best Practices
+### Praktik Keamanan Terbaik
 
-When using Castle-Script:
+Saat menggunakan Castle-Script:
 
-1. **Input Validation**: Always validate user input in your programs
-2. **File Operations**: Be careful with file paths and permissions
-3. **Execution**: Don't execute untrusted .cs files
-4. **Dependencies**: Keep Python and system libraries updated
+1. **Validasi Input**: Selalu validasi input pengguna dalam program Anda
+2. **Operasi File**: Hati-hati dengan path file dan permissions
+3. **Eksekusi**: Jangan jalankan file .cs yang tidak dipercaya
+4. **Dependencies**: Jaga agar sistem tetap update
 
-## Known Security Considerations
+## Pertimbangan Keamanan yang Perlu Diketahui
 
-### File System Access
+### Akses File System
 
-Castle-Script has file I/O functions (`baca_file`, `tulis_file`, etc.). Users should:
+Castle-Script memiliki fungsi file I/O (`baca_file`, `tulis_file`, dll). Pengguna harus:
 
-- Validate file paths before use
-- Use absolute paths when possible
-- Check permissions before file operations
-- Sanitize user-provided file names
+- Validasi path file sebelum digunakan
+- Gunakan absolute path jika memungkinkan
+- Periksa permissions sebelum operasi file
+- Sanitasi nama file yang diberikan pengguna
 
-### Code Execution
+### Eksekusi Kode
 
-Castle-Script executes code. When running .cs files:
+Castle-Script mengeksekusi kode. Saat menjalankan file .cs:
 
-- Only run trusted code
-- Review code before execution
-- Be aware of file system access in scripts
-- Use sandboxing for untrusted code
+- Hanya jalankan kode yang dipercaya
+- Review kode sebelum dijalankan
+- Waspadai akses file system dalam script
+- Gunakan sandboxing untuk kode yang tidak dipercaya
 
-### GUI Applications
+### Aplikasi GUI
 
-GUI functions use Tkinter. Be aware:
+Fungsi GUI menggunakan Tkinter. Perlu diperhatikan:
 
-- GUI apps can access system resources
-- Input fields should be validated
-- Don't trust user input without validation
+- Aplikasi GUI dapat mengakses resource sistem
+- Input field harus divalidasi
+- Jangan percaya input pengguna tanpa validasi
 
-## Security Updates
+## Update Keamanan
 
-Security patches will be released as:
+Patch keamanan akan dirilis sebagai:
 
-- Patch versions (e.g., 0.9.1 → 0.9.2) for minor issues
-- Minor versions (e.g., 0.9.x → 0.10.x) for significant issues
-- Announcements in GitHub Releases
+- Patch versions (misal 0.9.1 → 0.9.2) untuk masalah minor
+- Minor versions (misal 0.9.x → 0.10.x) untuk masalah signifikan
+- Pengumuman di GitHub Releases
 
-## Scope
+## Cakupan
 
-This security policy applies to:
+Kebijakan keamanan ini berlaku untuk:
 
-- Castle-Script interpreter (`src/castlescript.py`)
-- Built-in functions (all `src/castlescript_*.py` files)
-- Official launchers (`cs`, `cs.bat`, etc.)
+- Interpreter Castle-Script (`src/castlescript.py`)
+- Fungsi built-in (semua file `src/castlescript_*.py`)
+- Launcher resmi (`cs`, `cs.bat`, dll)
 
-Out of scope:
+Di luar cakupan:
 
-- User-written .cs programs
-- Third-party extensions
-- Deployment environments
+- Program .cs yang dibuat pengguna
+- Ekstensi pihak ketiga
+- Environment deployment
 
-## Contact
+## Kontak
 
-For security concerns: Use GitHub issues with "security" label
+Untuk masalah keamanan: Gunakan GitHub issues dengan label "security"
 
-For general questions: Use GitHub Discussions or regular issues
+Untuk pertanyaan umum: Gunakan GitHub Discussions atau issues reguler
 
 ---
 
-Thank you for helping keep Castle-Script and its users safe!
+Terima kasih telah membantu menjaga Castle-Script dan penggunanya tetap aman!
