@@ -1,11 +1,14 @@
 @echo off
 REM CastleScript Launcher for Windows
-REM Usage: castlescript.bat <file.cs>
+REM Updated for src/ directory structure
 
-if "%~1"=="" (
+if "%1"=="" (
     echo CastleScript - Bahasa Pemrograman Indonesia
-    echo Penggunaan: castlescript.bat ^<file.cs^>
+    echo Penggunaan: castlescript file.cs
     exit /b 1
 )
 
-python "%~dp0castlescript.py" %*
+set SCRIPT_DIR=%~dp0
+
+REM Run CastleScript from src/
+python "%SCRIPT_DIR%src\castlescript.py" %*

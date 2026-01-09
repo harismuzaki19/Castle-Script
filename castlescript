@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
-# CastleScript Launcher for Linux/macOS
-# Usage: ./castlescript <file.cs>
-
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# CastleScript Launcher for macOS/Linux
+# Updated for src/ directory structure
 
 if [ $# -eq 0 ]; then
     echo "CastleScript - Bahasa Pemrograman Indonesia"
-    echo "Penggunaan: ./castlescript <file.cs>"
+    echo "Penggunaan: castlescript file.cs"
     exit 1
 fi
 
-python3 "$SCRIPT_DIR/castlescript.py" "$@"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Run CastleScript from src/
+python3 "$SCRIPT_DIR/src/castlescript.py" "$@"

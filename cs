@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
-# CastleScript Launcher for macOS/Linux with REPL support
-# Usage:
-#   cs              - Interactive mode  
-#   cs file.cs      - Run file
-#   cs --help       - Show help
-#   cs --version    - Show version
+# CastleScript Launcher for macOS/Linux
+# Updated for src/ directory structure
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Run with REPL launcher
-python3 "$SCRIPT_DIR/cs_repl.py" "$@"
+# Run with REPL launcher from src/
+python3 "$SCRIPT_DIR/src/cs_repl.py" "$@"
