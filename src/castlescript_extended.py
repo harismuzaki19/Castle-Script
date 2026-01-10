@@ -37,6 +37,15 @@ def get_extended_builtins():
         arr.insert(index, item)
         return arr
     
+    def ubah(arr, index, item):
+        """Mengubah item array pada index tertentu"""
+        if not isinstance(arr, list):
+            raise TypeError("ubah() hanya bisa digunakan pada array")
+        if 0 <= index < len(arr):
+            arr[index] = item
+            return arr
+        raise IndexError(f"Index {index} di luar jangkauan")
+    
     def gabung(arr1, arr2):
         """Menggabungkan dua array"""
         if not isinstance(arr1, list) or not isinstance(arr2, list):
@@ -316,6 +325,7 @@ def get_extended_builtins():
         'tambah': tambah,
         'hapus': hapus,
         'sisip': sisip,
+        'ubah': ubah,
         'gabung': gabung,
         'irisan': irisan,
         'balik': balik,

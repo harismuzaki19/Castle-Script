@@ -60,6 +60,31 @@ def get_gui_functions(evaluator=None, env=None):
         if _current_window:
             _current_window.mainloop()
     
+    def atur_waktu(ms, fungsi_callback):
+        """Menjalankan fungsi setelah penundaan (ms)"""
+        if _current_window:
+            def callback_wrapper():
+                try:
+                    if callable(fungsi_callback):
+                        fungsi_callback()
+                    elif isinstance(fungsi_callback, tuple) and fungsi_callback[0] == 'function':
+                        if _evaluator and _environment:
+                            _, params, body = fungsi_callback
+                            from castlescript import Environment, ReturnValue
+                            func_env = Environment(_environment)
+                            try:
+                                _evaluator.eval(body, func_env)
+                            except Exception as e:
+                                if type(e).__name__ == 'ReturnValue':
+                                    pass
+                                else:
+                                    raise e
+                except Exception as e:
+                    print(f"Error in timer callback: {e}")
+            
+            _current_window.after(int(ms), callback_wrapper)
+
+    
     def atur_warna_latar(warna):
         """Mengatur warna latar belakang jendela"""
         if _current_window:
@@ -259,6 +284,12 @@ def get_gui_functions(evaluator=None, env=None):
         
         return widget_id
     
+    def bersihkan_kanvas(canvas_id):
+        """Menghapus semua gambar di canvas"""
+        if canvas_id in _gui_widgets:
+            _gui_widgets[canvas_id].delete("all")
+
+    
     def gambar_persegi(canvas_id, x1, y1, x2, y2, warna="black"):
         """Menggambar persegi di canvas"""
         if canvas_id in _gui_widgets:
@@ -282,7 +313,69 @@ def get_gui_functions(evaluator=None, env=None):
                 int(x1), int(y1), int(x2), int(y2),
                 fill=str(warna), width=int(tebal)
             )
+
+    def gambar_teks(canvas_id, x, y, teks, warna="black", ukuran=12):
+        """Menggambar teks di canvas"""
+        if canvas_id in _gui_widgets:
+            _gui_widgets[canvas_id].create_text(
+                int(x), int(y),
+                text=str(teks),
+                fill=str(warna),
+                font=("Segoe UI Symbol", int(ukuran))
+            )
     
+    
+    def bind_klik(widget_id, fungsi_callback):
+        """Bind event klik kiri mouse ke widget"""
+        if widget_id in _gui_widgets:
+            widget = _gui_widgets[widget_id]
+            
+            def callback_wrapper(event):
+                try:
+                    # Siapkan argumen x, y
+                    x = event.x
+                    y = event.y
+                    
+                    # Jika callback adalah tuple (fungsi CS)
+                    if isinstance(fungsi_callback, tuple) and fungsi_callback[0] == 'function':
+                        if _evaluator and _environment:
+                            _, params, body = fungsi_callback
+                            
+                            # Import classes
+                            from castlescript import Environment, ReturnValue
+                            
+                            # Create env
+                            func_env = Environment(_environment)
+                            
+                            # Pass arguments if function accepts them
+                            if len(params) == 2:
+                                func_env.set(params[0], x)
+                                func_env.set(params[1], y)
+                            elif len(params) == 0:
+                                pass # No args
+                            else:
+                                print(f"Warning: Callback klik harus punya 0 atau 2 parameter (x, y)")
+                                
+                            # Eval
+                            try:
+                                _evaluator.eval(body, func_env)
+                            except Exception as e:
+                                if type(e).__name__ == 'ReturnValue':
+                                    pass
+                                else:
+                                    raise e
+                    # Jika callback adalah callable Python
+                    elif callable(fungsi_callback):
+                        fungsi_callback(x, y)
+                except Exception as e:
+                    print(f"Error in click callback: {e}")
+                    import traceback
+                    traceback.print_exc()
+            
+            widget.bind("<Button-1>", callback_wrapper)
+            return True
+        return False
+
     # ===== FUNGSI GRID LAYOUT =====
     
     def atur_posisi_grid(widget_id, baris, kolom, colspan=1, rowspan=1):
@@ -302,6 +395,7 @@ def get_gui_functions(evaluator=None, env=None):
         'tutup_jendela': tutup_jendela,
         'jalankan': jalankan,
         'atur_warna_latar': atur_warna_latar,
+        'atur_waktu': atur_waktu,
         
         # Label functions
         'buat_label': buat_label,
@@ -327,9 +421,14 @@ def get_gui_functions(evaluator=None, env=None):
         
         # Canvas functions
         'buat_kanvas': buat_kanvas,
+        'bersihkan_kanvas': bersihkan_kanvas,
         'gambar_persegi': gambar_persegi,
         'gambar_lingkaran': gambar_lingkaran,
         'gambar_garis': gambar_garis,
+        'gambar_teks': gambar_teks,
+        
+        # Event Functions
+        'bind_klik': bind_klik,
         
         # Layout functions
         'atur_posisi_grid': atur_posisi_grid,

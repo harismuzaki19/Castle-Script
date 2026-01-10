@@ -62,7 +62,7 @@ class Lexer:
             'var', 'fungsi', 'kembalikan', 'jika', 'jika_tidak', 
             'selama', 'ulangi', 'benar', 'salah', 'kosong', 'dan', 
             'atau', 'tidak', 'buat', 'coba', 'tangkap', 'akhirnya',
-            'berhenti', 'lanjut', 'lempar',
+            'henti', 'lanjut', 'lempar',
             'kelas', 'konstruktor', 'ini', 'baru'
         }
     
@@ -260,9 +260,27 @@ class AssignNode(ASTNode):
         self.name = name
         self.value = value
 
+class BreakNode(ASTNode):
+    pass
+
+class ContinueNode(ASTNode):
+    pass
+
 class BlockNode(ASTNode):
     def __init__(self, statements):
         self.statements = statements
+
+class TryNode(ASTNode):
+    def __init__(self, try_block, catch_block, catch_var, finally_block):
+        self.try_block = try_block
+        self.catch_block = catch_block
+        self.catch_var = catch_var
+        self.finally_block = finally_block
+
+class ThrowNode(ASTNode):
+    def __init__(self, value):
+        self.value = value
+
 
 class IfNode(ASTNode):
     def __init__(self, condition, then_block, else_block=None):
@@ -422,6 +440,18 @@ class Parser:
         if self.current_token.type == 'KEYWORD' and self.current_token.value == 'kembalikan':
             return self.parse_return_statement()
         
+        # Break statement
+        if self.current_token.type == 'KEYWORD' and self.current_token.value == 'henti':
+            return self.parse_break_statement()
+        
+        # Continue statement
+        if self.current_token.type == 'KEYWORD' and self.current_token.value == 'lanjut':
+            return self.parse_continue_statement()
+
+        # Try statement
+        if self.current_token.type == 'KEYWORD' and self.current_token.value == 'coba':
+            return self.parse_try_statement()
+    
         # Expression statement (assignment or function call)
         expr = self.parse_expression()
         
@@ -541,6 +571,45 @@ class Parser:
         
         return ReturnNode(value)
     
+    def parse_break_statement(self):
+        self.expect('KEYWORD') # 'henti'
+        if self.current_token and self.current_token.type in ('SEMICOLON', 'NEWLINE'):
+            self.advance()
+        return BreakNode()
+
+    def parse_continue_statement(self):
+        self.expect('KEYWORD') # 'lanjut'
+        if self.current_token and self.current_token.type in ('SEMICOLON', 'NEWLINE'):
+            self.advance()
+        return ContinueNode()
+    
+    def parse_try_statement(self):
+        self.expect('KEYWORD') # 'coba'
+        self.expect('LBRACE')
+        try_block = self.parse_block()
+        self.expect('RBRACE')
+        
+        catch_block = None
+        catch_var = None
+        
+        if self.current_token.type == 'KEYWORD' and self.current_token.value == 'tangkap':
+            self.advance()
+            self.expect('LPAREN')
+            catch_var = self.expect('IDENTIFIER')
+            self.expect('RPAREN')
+            self.expect('LBRACE')
+            catch_block = self.parse_block()
+            self.expect('RBRACE')
+            
+        finally_block = None
+        if self.current_token.type == 'KEYWORD' and self.current_token.value == 'akhirnya':
+            self.advance()
+            self.expect('LBRACE')
+            finally_block = self.parse_block()
+            self.expect('RBRACE')
+            
+        return TryNode(try_block, catch_block, catch_var, finally_block)
+
     def parse_class_def(self):
         """Parse class definition"""
         self.expect('KEYWORD')  # 'kelas'
@@ -1022,6 +1091,8 @@ class Evaluator:
             right = self.eval(node.right, env)
             
             if node.op == '+':
+                if isinstance(left, str) or isinstance(right, str):
+                    return str(left) + str(right)
                 return left + right
             if node.op == '-':
                 return left - right
@@ -1081,16 +1152,29 @@ class Evaluator:
         
         if isinstance(node, WhileNode):
             result = None
-            while self.eval(node.condition, env):
-                result = self.eval(node.body, env)
+            try:
+                while self.eval(node.condition, env):
+                    try:
+                        result = self.eval(node.body, env)
+                    except ContinueException:
+                        continue
+            except BreakException:
+                pass
             return result
         
         if isinstance(node, ForNode):
             result = None
-            self.eval(node.init, env)
-            while self.eval(node.condition, env):
-                result = self.eval(node.body, env)
-                self.eval(node.increment, env)
+            try:
+                self.eval(node.init, env)
+                while self.eval(node.condition, env):
+                    try:
+                        result = self.eval(node.body, env)
+                    except ContinueException:
+                        self.eval(node.increment, env)
+                        continue
+                    self.eval(node.increment, env)
+            except BreakException:
+                pass
             return result
         
         if isinstance(node, FunctionDefNode):
@@ -1163,7 +1247,7 @@ class Evaluator:
             else:
                 raise TypeError(f"Tipe '{type(collection).__name__}' tidak mendukung indexing")
         
-        # Break & Continue (will be caught by loop)
+        # Break & Continue
         if isinstance(node, BreakNode):
             raise BreakException()
         
@@ -1184,6 +1268,23 @@ class Evaluator:
                 if node.finally_block:
                     self.eval(node.finally_block, env)
             return result
+        
+        # Try-Catch-Finally
+        if isinstance(node, TryNode):
+            try:
+                self.eval(node.try_block, env)
+            except (ReturnValue, BreakException, ContinueException):
+                raise
+            except Exception as e:
+                if node.catch_block:
+                    catch_env = Environment(env)
+                    if node.catch_var:
+                        catch_env.set(node.catch_var, str(e))
+                    self.eval(node.catch_block, catch_env)
+            finally:
+                if node.finally_block:
+                    self.eval(node.finally_block, env)
+            return None
         
         # Throw
         if isinstance(node, ThrowNode):
